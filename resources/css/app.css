@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+/* 🔎 Arquivos onde o Tailwind vai procurar classes */
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../views/**/*.blade.php";
+@source "../js/**/*.js";
+@source '../**/*.js';
+
+/* 🎨 Tema personalizado */
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Cores base (opcional, mas deixa mais bonito) */
+    --color-primary: #2563eb;
+    /* azul */
+    --color-danger: #dc2626;
+    /* vermelho */
+    --color-warning: #f59e0b;
+    /* amarelo */
+    --color-success: #16a34a;
+    /* verde */
+}
+
+/* 🌍 Estilos globais */
+@layer base {
+    body {
+        @apply bg-gray-100 text-gray-800 font-sans;
+    }
+
+    h1 {
+        @apply text-2xl font-bold;
+    }
+
+    button {
+        @apply transition;
+    }
+
+    input {
+        @apply outline-none;
+    }
+}
+
+/* 🧩 Componentes reutilizáveis */
+@layer components {
+
+    .card {
+        @apply bg-white shadow-md rounded-lg p-4;
+    }
+
+    .btn-primary {
+        @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700;
+    }
+
+    .btn-danger {
+        @apply bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700;
+    }
+
+    .btn-warning {
+        @apply bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600;
+    }
+
+    .input {
+        @apply w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-blue-500;
+    }
+
+    .container-app {
+        @apply max-w-3xl mx-auto mt-10;
+    }
+}
