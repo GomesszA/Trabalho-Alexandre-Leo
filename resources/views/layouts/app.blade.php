@@ -8,11 +8,21 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark px-4 mb-4">
-        <a class="navbar-brand" href="#">Lancheria</a>
-        <div>
-            <a href="/categorias" class="text-white me-3">Categorias</a>
-            <a href="/produtos" class="text-white me-3">Produtos</a>
-            <a href="/pedidos" class="text-white">Pedidos</a>
+        <a class="navbar-brand" href="{{ route('categorias.index') }}">Lancheria</a>
+        <div class="d-flex align-items-center gap-3">
+            @auth
+                <a href="{{ route('categorias.index') }}" class="text-white">Categorias</a>
+                <a href="{{ route('produtos.index') }}" class="text-white">Produtos</a>
+                <a href="{{ route('pedidos.index') }}" class="text-white">Pedidos</a>
+                <span class="text-white-50">{{ auth()->user()->name }}</span>
+                <form method="POST" action="{{ route('logout') }}" class="m-0">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="text-white">Entrar</a>
+                <a href="{{ route('register') }}" class="btn btn-outline-light btn-sm">Criar conta</a>
+            @endauth
         </div>
     </nav>
     <div class="container">
