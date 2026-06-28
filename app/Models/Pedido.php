@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
-    protected $fillable = ['user_id', 'status', 'total'];
+    protected $fillable = ['user_id', 'status', 'total', 'pagamento', 'troco'];
 
     public function itens()
     {
         return $this->hasMany(ItensPedido::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

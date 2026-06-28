@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\ItensPedido;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -18,7 +19,8 @@ class PedidoController extends Controller
     public function create()
     {
         $produtos = Produto::all();
-        return view('pedidos.create', compact('produtos'));
+        $categorias = Categoria::all();
+        return view('pedidos.create', compact('produtos', 'categorias'));
     }
 
     public function store(Request $request)
@@ -32,18 +34,20 @@ class PedidoController extends Controller
         }
 
         $pedido = Pedido::create([
-            'user_id' => 1,
-            'status' => 'aberto',
-            'total' => 0,
+            'user_id'   => auth()->id(),
+            'status'    => 'aberto',
+            'pagamento' => $request->pagamento ?? 'dinheiro',
+            'troco'     => $request->pagamento === 'dinheiro' ? $request->troco : null,
+            'total'     => 0,
         ]);
 
         $total = 0;
         foreach ($produtos as $item) {
             $produto = Produto::find($item['produto_id']);
             ItensPedido::create([
-                'pedido_id' => $pedido->id,
-                'produto_id' => $produto->id,
-                'quantidade' => $item['quantidade'],
+                'pedido_id'      => $pedido->id,
+                'produto_id'     => $produto->id,
+                'quantidade'     => $item['quantidade'],
                 'preco_unitario' => $produto->preco,
             ]);
             $total += $produto->preco * $item['quantidade'];
