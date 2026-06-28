@@ -180,8 +180,8 @@ Acesse **http://localhost:8000** no navegador.
 
 | Nome | GitHub |
 |------|--------|
-| Alexandre | [@GomesszA](https://github.com/GomesszA) |
-| Leonardo | — |
+| Alexandre |
+| Leonardo | [@LeoUberti](https://github.com/LeoUberti) |
 
 ---
 
