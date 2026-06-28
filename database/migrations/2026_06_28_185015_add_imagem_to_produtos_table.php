@@ -6,18 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::table('produtos', function (Blueprint $table) {
-            // Adiciona coluna de imagem (nullable = não obrigatório)
-            $table->string('imagem')->nullable()->after('estoque');
+            //
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::table('produtos', function (Blueprint $table) {
-            $table->dropColumn('imagem');
+            //
         });
     }
 };

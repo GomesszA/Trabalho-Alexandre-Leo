@@ -23,6 +23,14 @@ class PedidoController extends Controller
 
     public function store(Request $request)
     {
+        // Filtra apenas produtos com quantidade maior que zero
+        $produtos = collect($request->produtos)->filter(fn($item) => $item['quantidade'] > 0);
+
+        // Verifica se pelo menos um produto foi selecionado
+        if ($produtos->isEmpty()) {
+            return back()->withErrors(['produtos' => 'Selecione ao menos um produto.']);
+        }
+
         $pedido = Pedido::create([
             'user_id' => 1,
             'status' => 'aberto',
@@ -30,7 +38,7 @@ class PedidoController extends Controller
         ]);
 
         $total = 0;
-        foreach ($request->produtos as $item) {
+        foreach ($produtos as $item) {
             $produto = Produto::find($item['produto_id']);
             ItensPedido::create([
                 'pedido_id' => $pedido->id,

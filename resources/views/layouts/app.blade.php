@@ -8,9 +8,11 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark px-4 mb-4">
-        <a class="navbar-brand" href="{{ route('categorias.index') }}">Lancheria</a>
+        {{-- Logo/nome vai para a home --}}
+        <a class="navbar-brand" href="{{ route('home') }}">🍔 Lancheria</a>
         <div class="d-flex align-items-center gap-3">
             @auth
+                <a href="{{ route('home') }}" class="text-white">Início</a>
                 <a href="{{ route('categorias.index') }}" class="text-white">Categorias</a>
                 <a href="{{ route('produtos.index') }}" class="text-white">Produtos</a>
                 <a href="{{ route('pedidos.index') }}" class="text-white">Pedidos</a>

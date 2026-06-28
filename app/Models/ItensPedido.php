@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItensPedido extends Model
 {
+    protected $table = 'itens_pedido';
+    
     protected $fillable = ['pedido_id', 'produto_id', 'quantidade', 'preco_unitario'];
 
     public function produto()

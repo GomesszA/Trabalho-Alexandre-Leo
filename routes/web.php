@@ -6,8 +6,10 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\HomeController;
 
-Route::redirect('/', '/categorias');
+// Rota principal - tela de início
+Route::redirect('/', '/home');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -19,6 +21,9 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    // Home
+    Route::get('home', [HomeController::class, 'index'])->name('home');
 
     Route::resource('categorias', CategoriaController::class);
     Route::resource('produtos', ProdutoController::class);
